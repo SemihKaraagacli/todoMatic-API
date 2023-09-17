@@ -6,8 +6,9 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(router);
+app.use("/todo", router);
+
 
 app.listen(3000, () =>
-    console.log('REST API server ready at: http://localhost:3000'),
+    console.log('>>>> http://localhost:3000/todo <<<<'),
 )
