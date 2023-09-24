@@ -14,6 +14,6 @@ model Task {
   id        Int      @id @default(autoincrement())
   name      String   @unique
   comment   String
-  time      DateTime @db.Date
+  time      DateTime @default(now())
   complated Boolean  @default(false)
 }

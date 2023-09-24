@@ -1,78 +1,43 @@
 import { PrismaClient } from '@prisma/client';
 import { Router } from 'express';
-// import { todoAdd, todoGetAll, todoUpdate, todoShowTask, todoDelete } from '../controllers/todoAppController.js';
 
 const prisma = new PrismaClient()
 
 export const router = Router();
 
 router.get("/", async (req, res) => {
-
-    try {
-        const todoFetchAll = await prisma.task.findMany()
-        const statusTrue = res.status(200).json({
-            succes: true,
-            message: "Tüm veri başarıyla görüntülendi.",
-            data: todoFetchAll
-        })
-        return statusTrue
-        res.send(statusTrue)
-    } catch (error) {
-        const statusFalse = res.status(500).json({
-            succes: false,
-            message: "Veriler Görüntülenemedi." + error,
-        })
-        return statusFalse
-        res.send(statusFalse)
-    }
+    const todoFetchAll = await prisma.task.findMany()
+    res.render('todo/todo', { title: "deneme", items: todoFetchAll })
 
 })
+
 router.post("/", async (req, res) => {
-    const findTask = await prisma.task.findUnique(
-        {
-            where: {
-                name: req.body.name
+
+
+    try {
+        await prisma.task.findUnique(
+            {
+                where: {
+                    name: req.body.name
+                }
             }
-        }
-    )
 
-    if (findTask) {
-        const statusTrue = res.status(400).json({
-            success: false,
-            message: "isim zaten alınmış, lütfen başka bir isim"
+        )
+
+        await prisma.task.create({
+            data: {
+                name: req.body.name,
+                comment: req.body.comment,
+                time: req.body.time,
+                complated: req.body.complated
+            }
         })
-        return statusTrue
-        res.send(statusTrue)
+        res.redirect('/todo')
+    } catch (error) {
+        res.redirect('/todo')
     }
 
-    const taskAdd = await prisma.task.create({
-        data: {
-            name: req.body.name,
-            comment: req.body.comment,
-            time: req.body.time,
-            complated: req.body.complated
-        }
-    })
 
-    if (taskAdd) {
-        ;
-        const statusTrue = res.status(200).json({
-            success: true,
-            data: taskAdd,
-            message: "Basarıyla oluşturuldu"
-
-        })
-        return statusTrue
-        res.send(statusTrue)
-
-    } else {
-        const statusFalse = res.status(500).json({
-            success: false,
-            message: "Kayıt Oluşturulamadı."
-        })
-        return statusFalse
-        res.send(statusFalse)
-    }
 })
 router.get("/:id", async (req, res) => {
     const todoId = req.params.id
