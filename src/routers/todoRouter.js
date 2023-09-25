@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     const todoFetchAll = await prisma.task.findMany()
     res.render('todo/todo', { title: "deneme", items: todoFetchAll })
 
-})
+})//TodofetchAll
 
 router.post("/", async (req, res) => {
 
@@ -38,33 +38,22 @@ router.post("/", async (req, res) => {
     }
 
 
-})
+})//TodoAdd
+
 router.get("/:id", async (req, res) => {
     const todoId = req.params.id
-    try {
-        const todoShowTask = await prisma.task.findFirst({
-            where: {
-                id: Number(todoId)
-            }
-        })
-        const statusShowTrue = res.status(200).json({
-            success: true,
-            data: todoShowTask,
-            message: `Id'si ${todoId} olan kayıt gösterildi`
-        })
-        return statusShowTrue
-        res.send(statusShowTrue)
-    } catch (err) {
-        const statusShowFalse = res.status(200).json({
-            success: false,
-            message: `Id'si ${todoId} olan kayıt gösterilemedi`
-        })
-        return statusFalse
-        res.send(statusFalse)
-    }
-})
+    const todoShowTask = await prisma.task.findFirst({
+        where: {
+            id: Number(todoId)
+        }
+    })
+    res.render('todo/$todo', { tittle: "Todo Details", item: todoShowTask })
+
+})//TodoShowTask
+
 router.put("/:id", async (req, res) => {
     const taskId = req.params.id
+
     const todoUpdate = await prisma.task.update({
         where: {
             id: Number(taskId)
@@ -76,21 +65,9 @@ router.put("/:id", async (req, res) => {
             complated: req.body.complated
         }
     })
-    if (todoUpdate) {
-        const statusUpdateTrue = res.status(200).json({
-            success: true,
-            data: todoUpdate,
-            message: "Basarıyla güncellendi."
-        })
-        return statusUpdateTrue
-    } else {
-        const statusUpdateFalse = res.status(400).json({
-            success: false,
-            message: "güncelleme yapılamadı."
-        })
-        return statusUpdateFalse
-    }
-})
+    res.render('todo/$todo', { tittle: "Todo Details", item: todoUpdate })
+})//TodoUpdate
+
 router.delete("/:id", async (req, res) => {
     const todoId = req.params.id
     try {
@@ -112,4 +89,4 @@ router.delete("/:id", async (req, res) => {
         })
         return statusDeleteFalse
     }
-})
+})//TodoDelete
