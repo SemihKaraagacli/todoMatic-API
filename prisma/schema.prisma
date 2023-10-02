@@ -15,5 +15,6 @@ model Task {
   name      String   @unique
   comment   String
   time      DateTime @default(now())
+  updatedAt DateTime @updatedAt
   complated Boolean  @default(false)
 }
