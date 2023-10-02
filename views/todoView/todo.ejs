@@ -33,9 +33,15 @@
                     <div>
                         <%= item.time %>
                     </div>
+                    <div id="buttons">
+                        <a href="/todo/<%= item.id %>">SHOW</a>
+                        <a href="/todo/<%= item.id %>/edit">UPDATE</a>
+                        <a href="/todo/<%= item.id %>">DELETE</a>
+                    </div>
                 </li>
                 <% }) %>
         </ul>
+
     </div>
     </body>
 

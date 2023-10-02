@@ -7,9 +7,9 @@ export const router = Router();
 
 router.get("/", async (req, res) => {
     const todoFetchAll = await prisma.task.findMany()
-    res.render('todo/todo', { title: "deneme", items: todoFetchAll })
+    res.render('todoView/todo', { title: "deneme", items: todoFetchAll })
 
-})
+})//TodofetchAll
 
 router.post("/", async (req, res) => {
 
@@ -38,36 +38,38 @@ router.post("/", async (req, res) => {
     }
 
 
-})
+})//TodoAdd
+
 router.get("/:id", async (req, res) => {
     const todoId = req.params.id
-    try {
-        const todoShowTask = await prisma.task.findFirst({
-            where: {
-                id: Number(todoId)
-            }
-        })
-        const statusShowTrue = res.status(200).json({
-            success: true,
-            data: todoShowTask,
-            message: `Id'si ${todoId} olan kayıt gösterildi`
-        })
-        return statusShowTrue
-        res.send(statusShowTrue)
-    } catch (err) {
-        const statusShowFalse = res.status(200).json({
-            success: false,
-            message: `Id'si ${todoId} olan kayıt gösterilemedi`
-        })
-        return statusFalse
-        res.send(statusFalse)
-    }
-})
-router.put("/:id", async (req, res) => {
-    const taskId = req.params.id
-    const todoUpdate = await prisma.task.update({
+    const todoShowTask = await prisma.task.findFirst({
         where: {
-            id: Number(taskId)
+            id: Number(todoId)
+        }
+    });
+    res.render('todoView/$todo', { tittle: "Todo Details", item: todoShowTask })
+
+})//TodoShowTask
+
+router.get("/:id/edit", async (req, res) => {
+    const todoId = req.params.id
+    const todoShowTask = await prisma.task.findFirst({
+        where: {
+            id: Number(todoId)
+        }
+    });
+    res.render('todoView/todoUpdate', { tittle: "Todo Details", item: todoShowTask })
+
+})//TodoShowTask
+
+router.post("/:id/edit", async (req, res) => {
+
+    const taskId1 = req.params.id
+    console.log(taskId1);
+
+    await prisma.task.update({
+        where: {
+            id: Number(taskId1)
         },
         data: {
             name: req.body.name,
@@ -76,40 +78,29 @@ router.put("/:id", async (req, res) => {
             complated: req.body.complated
         }
     })
-    if (todoUpdate) {
-        const statusUpdateTrue = res.status(200).json({
-            success: true,
-            data: todoUpdate,
-            message: "Basarıyla güncellendi."
-        })
-        return statusUpdateTrue
-    } else {
-        const statusUpdateFalse = res.status(400).json({
-            success: false,
-            message: "güncelleme yapılamadı."
-        })
-        return statusUpdateFalse
-    }
-})
+    res.redirect('/todo')
+
+})//TodoUpdate
+
 router.delete("/:id", async (req, res) => {
     const todoId = req.params.id
-    try {
-        const todoDelete = await prisma.task.delete({
-            where: {
-                id: Number(todoId)
-            }
-        })
-        const statusDeleteTrue = res.status(200).json({
-            success: true,
-            data: todoDelete,
-            message: `${todoId} numaralı kayıt başarıyla silinmiştir`
-        })
-        return statusDeleteTrue
-    } catch (error) {
-        const statusDeleteFalse = res.status(200).json({
-            success: false,
-            message: `${todoId} numaralı kayıt başarıyla silinemedi`
-        })
-        return statusDeleteFalse
-    }
-})
+
+    await prisma.task.delete({
+        where: {
+            id: Number(todoId)
+        }
+    })
+    //     const statusDeleteTrue = res.status(200).json({
+    //         success: true,
+    //         data: todoDelete,
+    //         message: `${todoId} numaralı kayıt başarıyla silinmiştir`
+    //     })
+    //     return statusDeleteTrue
+    // } catch (error) {
+    //     const statusDeleteFalse = res.status(200).json({
+    //         success: false,
+    //         message: `${todoId} numaralı kayıt başarıyla silinemedi`
+    //     })
+    //     return statusDeleteFalse
+    // }
+})//TodoDelete
