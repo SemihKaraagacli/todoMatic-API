@@ -15,14 +15,6 @@ router.post("/", async (req, res) => {
 
 
     try {
-        await prisma.task.findUnique(
-            {
-                where: {
-                    name: req.body.name
-                }
-            }
-
-        )
 
         await prisma.task.create({
             data: {
@@ -40,14 +32,14 @@ router.post("/", async (req, res) => {
 
 })//TodoAdd
 
-router.get("/:id", async (req, res) => {
+router.get("/:id/show", async (req, res) => {
     const todoId = req.params.id
     const todoShowTask = await prisma.task.findFirst({
         where: {
             id: Number(todoId)
         }
     });
-    res.render('todoView/$todo', { tittle: "Todo Details", item: todoShowTask })
+    res.render('todoView/todoShow', { tittle: "Todo Details", item: todoShowTask })
 
 })//TodoShowTask
 
@@ -82,25 +74,13 @@ router.post("/:id/edit", async (req, res) => {
 
 })//TodoUpdate
 
-router.delete("/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
     const todoId = req.params.id
-
+    console.log(todoId);
     await prisma.task.delete({
         where: {
             id: Number(todoId)
         }
     })
-    //     const statusDeleteTrue = res.status(200).json({
-    //         success: true,
-    //         data: todoDelete,
-    //         message: `${todoId} numaralı kayıt başarıyla silinmiştir`
-    //     })
-    //     return statusDeleteTrue
-    // } catch (error) {
-    //     const statusDeleteFalse = res.status(200).json({
-    //         success: false,
-    //         message: `${todoId} numaralı kayıt başarıyla silinemedi`
-    //     })
-    //     return statusDeleteFalse
-    // }
+    res.redirect('/todo')
 })//TodoDelete

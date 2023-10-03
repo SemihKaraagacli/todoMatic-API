@@ -16,9 +16,7 @@ body{
     border: none;
     height: 30px;
     width: 200px;
-    margin: 10px;
-
-    
+    margin: 10px; 
 }
 #addButton{
     display: inline-block;
@@ -29,7 +27,6 @@ body{
     font-weight: bold;
     text-decoration: none;
     opacity: 0.7;
-
 }
 #addButton:hover{
     background-color: rgb(215, 126, 126);
