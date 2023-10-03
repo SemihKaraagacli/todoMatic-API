@@ -24,9 +24,9 @@ router.post("/", async (req, res) => {
                 complated: req.body.complated
             }
         })
-        res.redirect('/todo')
+        res.send('<script>alert("kayıt başarılı.✔️"); window.location.href = "/todo"; </script>');
     } catch (error) {
-        res.redirect('/todo')
+        res.send('<script>alert("kayıt başarısız✖️:Aynı isimde veri girişi yaptınız."); window.location.href = "/todo"; </script>');
     }
 
 
