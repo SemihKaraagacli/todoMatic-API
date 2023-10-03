@@ -27,14 +27,8 @@
                     <div>
                         <%= item.name %>
                     </div>
-                    <div>
-                        <%= item.comment %>
-                    </div>
-                    <div>
-                        <%= item.time %>
-                    </div>
                     <div id="buttons">
-                        <a href="/todo/<%= item.id %>">SHOW</a>
+                        <a href="/todo/<%= item.id %>/show">SHOW</a>
                         <a href="/todo/<%= item.id %>/edit">UPDATE</a>
                         <a href="/todo/<%= item.id %>">DELETE</a>
                     </div>
