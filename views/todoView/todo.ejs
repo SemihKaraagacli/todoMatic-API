@@ -16,25 +16,30 @@
         <h1 id="head">TodoMatic V1</h1>
         <form id="form" action="/todo" method="POST">
             <div>
-                <input type="text" id="input-field" name="name" placeholder="name" required>
-                <input type="text" id="input-field" name="comment" placeholder="comment" required>
+                <input type="text" id="input-field" name="name" placeholder="Task Header" required>
+                <input type="text" id="input-field" name="comment" placeholder="Task Comment" required>
+
             </div>
-            <button type="submit" id="addButton">Submit</button>
+            <div>
+                <button type="submit" id="addButton">Submit</button>
+            </div>
         </form>
-        <ul id="fetchAll1">
-            <% items.forEach((item)=> { %>
-                <li id="fetchAll">
-                    <div>
+        <div id="fetchAll">
+            <% items.sort((a,b)=>a.id - b.id).map((item)=> { %>
+                <div id="showTask">
+                    <div id="taskHeader">
                         <%= item.name %>
                     </div>
-                    <div id="buttons">
-                        <a href="/todo/<%= item.id %>/show">SHOW</a>
-                        <a href="/todo/<%= item.id %>/edit">UPDATE</a>
-                        <a href="/todo/<%= item.id %>">DELETE</a>
+                    <div>
+                        <a id="linkShow" href="/todo/<%= item.id %>/show">SHOW</a>
+                        <a id="linkUpdate" href="/todo/<%= item.id %>/edit">UPDATE</a>
+                        <a id="linkDelete" href="/todo/<%= item.id %>">DELETE</a>
+
                     </div>
-                </li>
+                </div>
+
                 <% }) %>
-        </ul>
+        </div>
 
     </div>
     </body>

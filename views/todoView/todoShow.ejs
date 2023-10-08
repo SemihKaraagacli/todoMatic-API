@@ -4,27 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/style.css">
     <title>
         <%= tittle %>
     </title>
 </head>
 
 <body>
-    <div>
-        <%= item.id %>
+    <div class="a">
+        <div id="id">
+            Id:
+            <span>
+                <%= item.id %>
+            </span>
+        </div>
+        <div id="header">
+            Task Header:
+            <span>
+                <%= item.name %>
+            </span>
+        </div>
+        <div id="comment">
+            Task Comment:
+            <span>
+                <%= item.comment %>
+            </span>
+        </div>
+        <div id="time">
+            Task Create Time:
+            <span>
+                <%= item.createAt %>
+            </span>
+        </div>
+        <div id="time">
+            Task Update Time:
+            <span>
+                <%= item.updatedAt %>
+            </span>
+        </div>
+        <div id="complated">
+            Task Complate:
+            <span>
+                <%= item.complated %>
+            </span>
+        </div>
     </div>
-    <div>
-        <%= item.name %>
-    </div>
-    <div>
-        <%= item.comment %>
-    </div>
-    <div>
-        <%= item.time %>
-    </div>
-    <div>
-        <%= item.complated %>
-    </div>
+    <a href="/todo">Back</a>
 </body>
 
 </html>
