@@ -14,7 +14,7 @@ model Task {
   id        Int      @id @default(autoincrement())
   name      String   @unique
   comment   String
-  time      DateTime @default(now())
+  createAt  DateTime @default(now())
   updatedAt DateTime @updatedAt
   complated Boolean  @default(false)
 }

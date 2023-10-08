@@ -1,59 +1,104 @@
-body{
-    background-color: gray;
+body {
+  background-color: gray;
 }
-.content{
-    display: flex;
-    flex-direction:column;
-    align-items: center;
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-#form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+#showTask,
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-#input-field{
-    border-radius: 3px;
-    border: none;
-    height: 30px;
-    width: 200px;
-    margin: 10px; 
+#input-field {
+  border: none;
+  border-radius: 3px;
+  width: 200px;
+  height: 30px;
 }
-#addButton{
-    display: inline-block;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 40px;
-    background-color: white;
-    font-weight: bold;
-    text-decoration: none;
-    opacity: 0.7;
+
+button {
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  padding: 6px 45px;
+  margin-top: 10px;
+  border-radius: 5px;
+  background-color: dodgerblue;
 }
-#addButton:hover{
-    background-color: rgb(215, 126, 126);
-    opacity: 1;
+#taskHeader {
+  margin-bottom: 13px;
+  margin-top: 18px;
+  font-size: 21px;
+  color: black;
 }
-#fetchAll{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 15px;
+
+#linkShow {
+  font-size: 13px;
+  border: none;
+  padding: 4px 15px;
+  border-radius: 5px;
+  background-color: rgb(36, 206, 76);
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
 }
-#buttons{
-    margin-top: 10px;
+#linkUpdate {
+  font-size: 13px;
+  border: none;
+  padding: 4px 15px;
+  border-radius: 5px;
+  background-color: rgb(16, 127, 231);
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
 }
-#buttons> a{
-    margin: 15px 20px;
-    background-color: white;
-    opacity: 0.7;
-    padding: 3px 10px;
-    text-decoration: none;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
+#linkDelete {
+  font-size: 13px;
+  border: none;
+  padding: 4px 15px;
+  border-radius: 5px;
+  background-color: rgb(224, 70, 70);
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
 }
-#buttons a:hover{
-    background-color: rgb(231, 207, 207);
-    text-decoration: underline;
-    opacity: 1;
+
+.a {
+  font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#id,
+#header,
+#comment,
+#time,
+#complated {
+  font-weight: bold;
+}
+div span {
+  text-decoration: none;
+  font-weight: normal;
+}
+
+#complated span {
+  text-transform: uppercase;
+}
+
+#label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#input {
+  border: none;
+  border-radius: 5px;
+  height: 25px;
+  margin-bottom: 10px;
 }

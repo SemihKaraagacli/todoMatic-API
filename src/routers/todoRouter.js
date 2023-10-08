@@ -7,7 +7,7 @@ export const router = Router();
 
 router.get("/", async (req, res) => {
     const todoFetchAll = await prisma.task.findMany()
-    res.render('todoView/todo', { title: "deneme", items: todoFetchAll })
+    res.render('todoView/todo', { title: "TodoMatic | V1", items: todoFetchAll })
 
 })//TodofetchAll
 
@@ -20,7 +20,6 @@ router.post("/", async (req, res) => {
             data: {
                 name: req.body.name,
                 comment: req.body.comment,
-                time: req.body.time,
                 complated: req.body.complated
             }
         })
@@ -50,14 +49,13 @@ router.get("/:id/edit", async (req, res) => {
             id: Number(todoId)
         }
     });
-    res.render('todoView/todoUpdate', { tittle: "Todo Details", item: todoShowTask })
+    res.render('todoView/todoUpdate', { tittle: "Todo Edit", item: todoShowTask })
 
 })//TodoShowTask
 
 router.post("/:id/edit", async (req, res) => {
 
     const taskId1 = req.params.id
-    console.log(taskId1);
 
     await prisma.task.update({
         where: {
@@ -66,8 +64,7 @@ router.post("/:id/edit", async (req, res) => {
         data: {
             name: req.body.name,
             comment: req.body.comment,
-            time: req.body.time,
-            complated: req.body.complated
+            complated: Boolean(req.body.complated)
         }
     })
     res.redirect('/todo')
@@ -76,7 +73,6 @@ router.post("/:id/edit", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     const todoId = req.params.id
-    console.log(todoId);
     await prisma.task.delete({
         where: {
             id: Number(todoId)
